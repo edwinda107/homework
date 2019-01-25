@@ -1,0 +1,34 @@
+extends ../layouts/common
+block content
+    h1 Products
+    .d-flex.align-items-center
+        form.ml-auto(action='/products/search', method = 'GET' , class = 'd-flex')
+            input(type = 'text',name='q',class = 'form-control')
+            button(class = 'btn btn-primary ml-2') Search
+    each product in products
+        .col-sm-6.col-md-4.col-lg-3
+            .card.mb-3
+                img.card-img-top(src=product.image)
+                .card-body
+                    h5.card-title=product.title
+                    p.card-text=product.desciption
+                    a.btn.btn-primary(href = '/cart/add/' + product.id) Add to cart
+    - var count = 0 ;
+    - var url = '/product?page=' ; 
+    - var pre = (parseInt(pos)-1).toString() ; 
+    - var next = (parseInt(pos)+1).toString() ;
+    nav(aria-label='pagefoot')
+    ul.pagination
+        li.page-item.disabled
+        a.page-link(href=url+pre, tabindex='-1', aria-disabled='true') Previous
+        li.page-item
+        a.page-link(href=url+pre)=pre
+        li.page-item.active(aria-current='page')
+        a.page-link(href=url+pos)=pos
+            span.sr-only (current)
+        li.page-item
+        a.page-link(href=url+next)=next
+        li.page-item
+        a.page-link(href=url+next) Next
+
+

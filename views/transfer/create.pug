@@ -1,0 +1,14 @@
+extends ../layouts/common.pug 
+block content
+  if errors
+      each error in errors
+          .alert.alert-danger= error
+  h1 New transfer 
+  form(action='/transfer/create' method = 'POST')
+      .form-group
+          label(for='account') Account
+          input#account.form-control(type = 'text' name ='accountId') 
+      .form-group
+          label(for='amount') Amount
+          input#amount.form-control(type = 'number' name ='amount') 
+      button.btn.btn-dark Transfer
